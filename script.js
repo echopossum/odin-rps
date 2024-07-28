@@ -59,18 +59,20 @@ function getComputerChoice(){
 function getHumanChoice(){
     let choice = prompt("Please choose rock, paper, or scissors").toLowerCase()
     if(choice == "rock" || choice == "paper" || choice == "scissors"){
-        console.log(choice)
+        return choice
     }
     else{
         getHumanChoice()
     }
 }
 
-function playRound(computerChoice, humanChoice){
-
+function playRound(humanChoice,computerChoice){
+    alert(outcomes[humanChoice][computerChoice].result)
 }
 
 function score(human,compy){
     humanScore = humanScore + human
     computerScore = computerScore = compy
 }
+
+playRound(getHumanChoice(),getComputerChoice())
