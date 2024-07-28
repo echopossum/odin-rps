@@ -68,11 +68,28 @@ function getHumanChoice(){
 
 function playRound(humanChoice,computerChoice){
     alert(outcomes[humanChoice][computerChoice].result)
+    outcomes[humanChoice][computerChoice].score()
+    console.log(humanScore,computerScore)
 }
 
 function score(human,compy){
     humanScore = humanScore + human
-    computerScore = computerScore = compy
+    computerScore = computerScore + compy
 }
 
-playRound(getHumanChoice(),getComputerChoice())
+function playGame(){
+    for(let round = 0; round <=4; round++){
+        playRound(getHumanChoice(),getComputerChoice())
+    }
+    if(humanScore > computerScore){
+        alert("You Win!!!")
+    }
+    else if(computerScore > humanScore){
+        alert("You lose, better luck next time")
+    }
+    else{
+        alert("It's a tie")
+    }
+}
+
+playGame()
