@@ -7,7 +7,7 @@ let choices = [
 let humanScore = 0
 let computerScore = 0
 
-let roundCount = 1
+let roundCount = 0
 
 let outcomes = {
     rock: {
@@ -54,6 +54,9 @@ let outcomes = {
     },
 }
 
+const scoreBoard = document.querySelector('.scoreboard')
+const message = document.querySelector('.info')
+
 function getComputerChoice(){
     return choices[Math.floor(Math.random()*3)]
 }
@@ -69,14 +72,36 @@ function getHumanChoice(){
 }
 
 function playRound(humanChoice,computerChoice){
-    alert(outcomes[humanChoice][computerChoice].result)
+    message.textContent = outcomes[humanChoice][computerChoice].result
     outcomes[humanChoice][computerChoice].score()
-    console.log(humanScore,computerScore)
 }
 
 function score(human,compy){
     humanScore = humanScore + human
     computerScore = computerScore + compy
+
+    roundCount += 1
+    scoreBoard.textContent = `You:${humanScore} Computer:${computerScore} Round:${roundCount}/5`
+    if(roundCount == 5){
+        if(humanScore > computerScore){
+            alert("You Win!!!")
+        }
+        else if(computerScore > humanScore){
+            alert("Sorry,  you loose. Better luck next time")
+        }
+        else{
+            alert("It's a tie")
+        }
+        endGame()
+    }
+}
+
+function endGame(){
+    humanScore = 0
+    computerScore = 0
+    roundCount = 0
+    scoreBoard.textContent = `You:${humanScore} Computer:${computerScore} Round:${roundCount}/5`
+    message.textContent = "Let's play some rock, paper, scissors!"
 }
 
 //New Button Driven Logic
@@ -86,4 +111,8 @@ choiceButtons.forEach(btn => {
         playRound(e.target.id,getComputerChoice())
     })
 });
+
+scoreBoard.textContent = `You:${humanScore} Computer:${computerScore} Round:${roundCount}/5`
+
+message.textContent = "Let's play some rock, paper, scissors!"
 
