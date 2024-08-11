@@ -7,6 +7,8 @@ let choices = [
 let humanScore = 0
 let computerScore = 0
 
+let roundCount = 1
+
 let outcomes = {
     rock: {
         rock:{
@@ -77,19 +79,11 @@ function score(human,compy){
     computerScore = computerScore + compy
 }
 
-function playGame(){
-    for(let round = 0; round <=4; round++){
-        playRound(getHumanChoice(),getComputerChoice())
-    }
-    if(humanScore > computerScore){
-        alert("You Win!!!")
-    }
-    else if(computerScore > humanScore){
-        alert("You lose, better luck next time")
-    }
-    else{
-        alert("It's a tie")
-    }
-}
+//New Button Driven Logic
+const choiceButtons = document.querySelectorAll('.choiceButton')
+choiceButtons.forEach(btn => {
+    btn.addEventListener('click',(e)=>{
+        playRound(e.target.id,getComputerChoice())
+    })
+});
 
-playGame()
